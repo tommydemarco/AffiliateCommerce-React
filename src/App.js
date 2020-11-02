@@ -1,25 +1,28 @@
 import React from 'react';
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+//=======> ROUTER
+import { Switch, Route, Redirect } from 'react-router-dom';
+//=======> PAGES AND COMPONENTS
 import ContentContainer from './components/content-container/ContentContainer'
 import TheHeader from './components/the-header/TheHeader'
 import HomePage from './pages/home/HomePage'
 import ShopPage from './pages/shop/ShopPage'
 import SignInUpPage from './pages/sign-in-up/SignInUpPage'
 import LogOutPage from './pages/log-out/LogOutPage'
+//=======> FIREBASE AUTH
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
+//=======> REDUX
+import { connect } from 'react-redux'
+//importing the actions 
+import { setCurrentUser } from './redux/user/user.actions'
+
 
 class App extends React.Component {
-  constructor() {
-    super();
 
-    this.state = {
-      currentUser: null
-    }
-  }
-    unsubscribeFromAuth = null
+  unsubscribeFromAuth = null
 
   componentDidMount() {
+    const {setCurrentUser} = this.props
 //onAuthStateChanged is a method that get triggered when the auth status changed.
 //the component doesn't re-render, the method acts like an event handler.
 
@@ -36,16 +39,16 @@ class App extends React.Component {
         //getting the data that we need from userRef with the onSnapshot method
         //and then setting the state with the data that we got
         userRef.onSnapshot(snapShot => {
-          this.setState({
-            currentUser: {
+          setCurrentUser(
+            {
               id: snapShot.id,
               ...snapShot.data()
             }
-          })
+          )
         })
       } else /*so basically on logout*/ {
         //setting the state of the current user to null
-        this.setState({ currentUser: userAuth })
+        setCurrentUser(userAuth)
       }
     })
   }
@@ -57,11 +60,13 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <TheHeader currentUser={this.state.currentUser} />
+        <TheHeader/>
         <Switch>
           <ContentContainer>
             <Route exact path="/" component={HomePage} />
-            <Route exact path="/signin" component={SignInUpPage} />
+            <Route exact path="/signin" 
+              render={() => this.props.currentUser ? (<Redirect to="/" />) : (<SignInUpPage />) }
+            />
             <Route exact path="/logout" component={LogOutPage} />
             <Route exact path="/shop" component={ShopPage} />
           </ContentContainer>
@@ -71,5 +76,16 @@ class App extends React.Component {
   }
  
 }
+var mapStateToProps = (state) => (
+  {currentUser: state.user.currentUser}
+)
+//the exact same thing but destructuring user from state 
+mapStateToProps = ({ user }) => (
+  {currentUser: user.currentUser}
+)
+const mapDispatchToProps = dispatch => (
+  { setCurrentUser: user => dispatch(setCurrentUser(user)) }
+)
 
-export default App;
+//passin null as the first argument for the mapStatetoProps, not needed here
+export default connect(mapStateToProps, mapDispatchToProps)(App);

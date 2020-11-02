@@ -2,6 +2,8 @@ import React from 'react';
 import './TheHeader.styles.scss';
 import { NavLink, Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
+import { connect } from 'react-redux';
+import CartIcon from '../cart-icon/CartIcon'
 
 const TheHeader = ({currentUser}) => (
     <header className="header">
@@ -24,8 +26,15 @@ const TheHeader = ({currentUser}) => (
                 LOG IN
             </NavLink>
             }
+            <CartIcon />
         </nav>
     </header>
 )
 
-export default TheHeader;
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.user.currentUser
+    }
+}
+
+export default connect(mapStateToProps)(TheHeader);
