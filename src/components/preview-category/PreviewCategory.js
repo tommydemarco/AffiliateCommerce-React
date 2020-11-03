@@ -9,7 +9,7 @@ const PreviewCategory = ({title, items}) => (
         </h2>
         <div className="preview">
             {items.filter((item, index) => index < 4).map(({id, ...otherItemProps }) => (
-                <ProductItem key={id} {...otherItemProps } ></ProductItem>
+                <ProductItem key={id} id={id} { ...otherItemProps } ></ProductItem>
             ))}
         </div>
     </div>

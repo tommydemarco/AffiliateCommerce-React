@@ -4,8 +4,9 @@ import { NavLink, Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 import { connect } from 'react-redux';
 import CartIcon from '../cart-icon/CartIcon'
+import CartDropdown from '../cart-dropdown/CartDropdown'
 
-const TheHeader = ({currentUser}) => (
+const TheHeader = ({currentUser, cartDisplay}) => (
     <header className="header">
         <Link to="/" className="logo-container">
             <Logo className="logo" />
@@ -28,12 +29,16 @@ const TheHeader = ({currentUser}) => (
             }
             <CartIcon />
         </nav>
+        {cartDisplay ?
+            <CartDropdown /> : false
+        }
     </header>
 )
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({user: {currentUser}, cart: { cartDisplay } }) => {
     return {
-        currentUser: state.user.currentUser
+        currentUser,
+        cartDisplay
     }
 }
 
