@@ -2,10 +2,11 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import './MenuItem.styles.scss';
 
-const MenuItem = ({ title, subtitle, image, history, clean_url, match }) => (
+                //USING withRouter HOC you have access to routing property (history, match)
+const MenuItem = ({ title, subtitle, imageUrl, history, clean_url, match }) => (
     <article className="menu-item" onClick={() => history.push(`${match.url}${clean_url}`)}>
         <div className="background-container"  style={{
-                backgroundImage: `url(${image})`
+                backgroundImage: `url(${imageUrl})`
             }}>
         </div>
         <div className="content">
@@ -16,4 +17,5 @@ const MenuItem = ({ title, subtitle, image, history, clean_url, match }) => (
     </article>
 )
 
+                //withRouter HOC, returns a superpowered component 
 export default withRouter(MenuItem);

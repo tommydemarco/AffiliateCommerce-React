@@ -9,6 +9,7 @@ import HomePage from './pages/home/HomePage'
 import ShopPage from './pages/shop/ShopPage'
 import SignInUpPage from './pages/sign-in-up/SignInUpPage'
 import LogOutPage from './pages/log-out/LogOutPage'
+import CheckoutPage from './pages/checkout/CheckoutPage'
 //=======> FIREBASE AUTH
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 //=======> REDUX
@@ -68,7 +69,8 @@ class App extends React.Component {
               render={() => this.props.currentUser ? (<Redirect to="/" />) : (<SignInUpPage />) }
             />
             <Route exact path="/logout" component={LogOutPage} />
-            <Route exact path="/shop" component={ShopPage} />
+            <Route exact path="/checkout" component={CheckoutPage} />
+            <Route path="/shop" component={ShopPage} />
           </ContentContainer>
         </Switch>
       </div>  

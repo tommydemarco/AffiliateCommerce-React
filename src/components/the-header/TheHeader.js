@@ -2,9 +2,12 @@ import React from 'react';
 import './TheHeader.styles.scss';
 import { NavLink, Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
-import { connect } from 'react-redux';
 import CartIcon from '../cart-icon/CartIcon'
 import CartDropdown from '../cart-dropdown/CartDropdown'
+//======> REDUX 
+import { connect } from 'react-redux';
+//======> REDUX RESELECT for caching 
+import { selectCurrentUser } from '../../redux/user/user.selectors'
 
 const TheHeader = ({currentUser, cartDisplay}) => (
     <header className="header">
@@ -35,10 +38,10 @@ const TheHeader = ({currentUser, cartDisplay}) => (
     </header>
 )
 
-const mapStateToProps = ({user: {currentUser}, cart: { cartDisplay } }) => {
+const mapStateToProps = (state) => {
     return {
-        currentUser,
-        cartDisplay
+        currentUser: selectCurrentUser(state),
+        cartDisplay: state.cart.cartDisplay
     }
 }
 
