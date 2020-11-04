@@ -3,8 +3,8 @@ import { withRouter } from 'react-router-dom';
 import './MenuItem.styles.scss';
 
                 //USING withRouter HOC you have access to routing property (history, match)
-const MenuItem = ({ title, subtitle, imageUrl, history, clean_url, match }) => (
-    <article className="menu-item" onClick={() => history.push(`${match.url}${clean_url}`)}>
+const MenuItem = ({ title, subtitle, imageUrl, history, linkUrl, match }) => (
+    <article className="menu-item" onClick={() => history.push(`/${match.url}/${linkUrl}`)}>
         <div className="background-container"  style={{
                 backgroundImage: `url(${imageUrl})`
             }}>
