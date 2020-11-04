@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import './MenuItem.styles.scss';
+
+import './MenuItem.styles.scss';    
 
                 //USING withRouter HOC you have access to routing property (history, match)
 const MenuItem = ({ title, subtitle, imageUrl, history, linkUrl, match }) => (

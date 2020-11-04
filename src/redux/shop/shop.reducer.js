@@ -2,8 +2,7 @@ import INITIAL_STATE from './shop.initialstate'
 
 const shopReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        default : 
-            return state
+        default: return state
     }
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import './ShopPage.styles.scss';
 //========> COMPONENTS 
 import CollectionsOverview from '../../components/collections-overview/CollectionsOverview'
-import CategoryPage from '../../pages/category/CategoryPage'
+import CategoryPage from '../category/CategoryPage'
 //========> NESTED ROUTING 
 import { Route } from 'react-router-dom'
 

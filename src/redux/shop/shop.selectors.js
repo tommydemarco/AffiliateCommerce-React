@@ -11,7 +11,7 @@ const MAP_CATEGORY_TO_ID = {
 const shopSelector = state => state.shop
 
 export const collectionSelector = createSelector(
-    [shopSelector], 
+    [shopSelector],
     (shop) => shop.collection
 )
 
