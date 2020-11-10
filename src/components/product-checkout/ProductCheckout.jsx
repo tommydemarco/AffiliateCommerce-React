@@ -3,9 +3,6 @@ import './ProductCheckout.styles.scss'
 //======> REDUX 
 import { connect } from 'react-redux';
 import { deleteItemFromCart, addItemToCart, reduceItemsInCart } from '../../redux/cart/cart.actions'
-//======> REDUX RESELECTER
-import { createStructuredSelector } from 'reselect'
-import { selectCartItems } from '../../redux/cart/cart.selectors';
 
 const ProductCheckout = ({ cartItem: { id, name, imageUrl, price, quantity }, deleteItemFromCart, addItemToCart, reduceItemsInCart }) => {
     const item = { id, name, imageUrl, price, quantity }

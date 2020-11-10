@@ -1,6 +1,7 @@
 import React from 'react'
 import './CheckoutPage.styles.scss'
 import ProductCheckout from '../../components/product-checkout/ProductCheckout'
+import StripeButton from '../../components/stripe-button/StripeButton'
 //=====> REDUX 
 import { connect } from 'react-redux';
 //=====> REDUX RESELECT 
@@ -37,6 +38,7 @@ const CheckoutPage = ({ totalPrice, cartItems }) => {
             
             <footer className="total">
                 <span>TOTAL: {totalPrice}€</span>
+                <StripeButton />
             </footer>
         </section>
     )

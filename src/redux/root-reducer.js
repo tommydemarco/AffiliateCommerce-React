@@ -7,18 +7,18 @@ import shopReducer from './shop/shop.reducer';
 
 //=======> PERSISTER CONFIGURATION
 import { persistReducer } from 'redux-persist'
-import storage from'redux-persist/lib/storage';
+import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
     key: 'root',
     storage: storage,
-    whitelist: ['cart', 'directory', 'shop']
+    whitelist: [ 'cart', 'directory' ]
 }
 
 
-export default persistReducer(persistConfig, combineReducers({
+export default persistReducer( persistConfig, combineReducers( {
     user: userReducer,
     cart: cartReducer,
     directory: directoryReducer,
     shop: shopReducer
-}))
+} ) )

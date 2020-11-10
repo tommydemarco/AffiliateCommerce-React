@@ -6,7 +6,7 @@ import PreviewCategory from '../preview-category/PreviewCategory'
 import { connect } from 'react-redux'
 //======> REDUX RESELECT
 import { createStructuredSelector } from 'reselect'
-import { collectionSelector } from '../../redux/shop/shop.selectors'
+import { collectionSelectorForPreview } from '../../redux/shop/shop.selectors'
 
 const CollectionOverview = ({ collections }) => {
     return (
@@ -19,7 +19,7 @@ const CollectionOverview = ({ collections }) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-    collections: collectionSelector
+    collections: collectionSelectorForPreview
 })
 
 export default connect(mapStateToProps)(CollectionOverview);

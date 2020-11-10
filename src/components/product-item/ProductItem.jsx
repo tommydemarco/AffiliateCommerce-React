@@ -11,7 +11,7 @@ const ProductItem = ({ id, name, price, imageUrl, addItemToCart }) => {
     <article className="collection-item">
         <header>
             <div className="image-container">
-                <img src={imageUrl} className="image" />
+                <img src={imageUrl} className="image" alt="visualization of the product" />
             </div>
             <h3 className="name">{name}</h3>
             <span className="price">{price}</span>
