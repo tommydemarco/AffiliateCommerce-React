@@ -1,7 +1,21 @@
 import { createSelector } from 'reselect'
 
+//GENERAL STATE SLICE SELECTOR
 const shopSelector = state => state.shop
 
+//IS FETCHING SELECTOR
+export const isFetchingSelector = createSelector(
+    [ shopSelector ],
+    ( shop ) => shop.isFetching
+)
+
+//ERROR SELECTOR
+export const errorSelector = createSelector(
+    [ shopSelector ],
+    ( shop ) => shop.errorMessage
+)
+
+//COLLECTION SELECTORS 
 export const collectionSelector = createSelector(
     [ shopSelector ],
     ( shop ) => shop.collections
@@ -9,7 +23,7 @@ export const collectionSelector = createSelector(
 
 export const collectionSelectorForPreview = createSelector(
     [ collectionSelector ],
-    collections => Object.keys( collections ).map( key => collections[ key ] )
+    collections => collections ? Object.keys( collections ).map( key => collections[ key ] ) : []
 )
 
 export const categorySelector = categorySelectorUrl => {
@@ -18,7 +32,7 @@ export const categorySelector = categorySelectorUrl => {
             [ collectionSelector ],
 
             collections => {
-                return collections[ categorySelectorUrl ]
+                return collections ? collections[ categorySelectorUrl ] : null
             }
         )
     )

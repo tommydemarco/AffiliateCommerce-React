@@ -1,0 +1,25 @@
+.the-spinner {
+    min-height: 400px;
+    display: flex;
+    &__container {
+        flex: 1 1 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__icon {
+        fill: #227093;
+        height: 50px;
+        width: 50px;
+        animation: you-spin-me-round-round-baby-right-round-like-a-record-baby-round-round-round-round 2s linear infinite;
+    }
+}
+
+@keyframes you-spin-me-round-round-baby-right-round-like-a-record-baby-round-round-round-round {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

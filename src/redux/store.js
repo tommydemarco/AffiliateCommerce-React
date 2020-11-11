@@ -1,10 +1,14 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+
+//THUNK
+import thunk from 'redux-thunk'
+
 //import logger from 'redux-logger';
 import { persistStore } from 'redux-persist';
 
 import rootReducer from './root-reducer';
 
-const middlewares = [] //[ logger ]
+const middlewares = [ thunk ] //[ logger ]
 
 //Redux browser extension
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

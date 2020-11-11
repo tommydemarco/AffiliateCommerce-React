@@ -3,33 +3,38 @@ import './ShopPage.styles.scss';
 //========> COMPONENTS 
 import CollectionsOverview from '../../components/collections-overview/CollectionsOverview'
 import CategoryPage from '../category/CategoryPage'
+//======> HOC
+import TheSpinner from '../../components/the-spinner/TheSpinner'
 //========> NESTED ROUTING 
 import { Route } from 'react-router-dom'
-//========> FIREBASE 
-import { firestore, convertCollectionArrayToMap } from '../../firebase/firebase.utils'
 //========> REDUX 
 import { connect } from 'react-redux'
-import { addItemsToShop } from '../../redux/shop/shop.actions'
+import { fetchCollectionStartAsync } from '../../redux/shop/shop.actions'
+//========> RESELECT 
+import { createStructuredSelector } from 'reselect'
+import { isFetchingSelector, errorSelector } from '../../redux/shop/shop.selectors'
 
 //being the shop page a component rendered through routing (the main routing in App.js)
 //we have access to the properties: MATCH, HISTORY and LOCATION
 class ShopPage extends React.Component {
 
-    unsubscribeFromSnapshot = null
-
     componentDidMount() {
         const { updateCollection } = this.props
-
-        const collectionRef = firestore.collection('collections')
-
-        collectionRef.onSnapshot(async snapshot => {
-            const collectionMap = convertCollectionArrayToMap(snapshot)
-            updateCollection(collectionMap)
-        })
-    }
+        updateCollection()
+    } 
 
     render() {
-        const { match } = this.props 
+        const { isFetching, errorMessage } = this.props
+
+        if (isFetching) {
+            return <TheSpinner />
+        }
+
+        if(errorMessage) {
+            return <p>{errorMessage} </p>
+        }
+
+        const { match } = this.props
         return(
             <div className="shop-page">
                 <Route exact path={match.path} component={CollectionsOverview} />
@@ -42,8 +47,12 @@ class ShopPage extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateCollection: collectionMap => dispatch(addItemsToShop(collectionMap))
+        updateCollection: () => dispatch(fetchCollectionStartAsync())
     }
 }
+const mapStateToProps = createStructuredSelector({
+    isFetching: isFetchingSelector,
+    errorMessage: errorSelector
+})
 
-export default connect(null, mapDispatchToProps)(ShopPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);
