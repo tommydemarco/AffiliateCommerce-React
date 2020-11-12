@@ -12,6 +12,8 @@ import ShopPage from './pages/shop/ShopPage'
 import SignInUpPage from './pages/sign-in-up/SignInUpPage'
 import LogOutPage from './pages/log-out/LogOutPage'
 import CheckoutPage from './pages/checkout/CheckoutPage'
+//=======> SAGAS test 
+import SagasPage from './pages/sagas/Sagas'
 //=======> FIREBASE AUTH
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 //=======> REDUX
@@ -79,6 +81,7 @@ class App extends React.Component {
             <Route exact path="/logout" component={LogOutPage} />
             <Route exact path="/checkout" component={CheckoutPage} />
             <Route path="/shop" component={ShopPage} />
+            <Route exact path="/sagas" component={SagasPage} />
           </ContentContainer>
         </Switch>
         <TheFooter />

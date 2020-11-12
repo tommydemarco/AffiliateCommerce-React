@@ -8,7 +8,7 @@ import TheSpinner from '../../components/the-spinner/TheSpinner'
 import { Route } from 'react-router-dom'
 //========> REDUX 
 import { connect } from 'react-redux'
-import { fetchCollectionStartAsync } from '../../redux/shop/shop.actions'
+import { fetchCollectionStart } from '../../redux/shop/shop.actions'
 //========> RESELECT 
 import { createStructuredSelector } from 'reselect'
 import { isFetchingSelector, errorSelector } from '../../redux/shop/shop.selectors'
@@ -46,7 +46,7 @@ class ShopPage extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateCollection: () => dispatch(fetchCollectionStartAsync())
+        updateCollection: () => dispatch(fetchCollectionStart())
     }
 }
 const mapStateToProps = createStructuredSelector({
