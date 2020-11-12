@@ -3,7 +3,6 @@ import './ShopPage.styles.scss';
 //========> COMPONENTS 
 import CollectionsOverview from '../../components/collections-overview/CollectionsOverview'
 import CategoryPage from '../category/CategoryPage'
-//======> HOC
 import TheSpinner from '../../components/the-spinner/TheSpinner'
 //========> NESTED ROUTING 
 import { Route } from 'react-router-dom'

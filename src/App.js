@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 //=======> PAGES AND COMPONENTS
 import ContentContainer from './components/content-container/ContentContainer'
 import TheHeader from './components/the-header/TheHeader'
+import TheFooter from './components/the-footer/TheFooter'
 import LowerHeader from './components/lower-header/LowerHeader'
 import HomePage from './pages/home/HomePage'
 import ShopPage from './pages/shop/ShopPage'
@@ -15,7 +16,6 @@ import CheckoutPage from './pages/checkout/CheckoutPage'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 //=======> REDUX
 import { connect } from 'react-redux'
-import { collectionSelectorForPreview } from './redux/shop/shop.selectors'
 //importing the actions 
 import { setCurrentUser } from './redux/user/user.actions'
 
@@ -25,7 +25,7 @@ class App extends React.Component {
   unsubscribeFromAuth = null
 
   componentDidMount() {
-    const {setCurrentUser, collection} = this.props
+    const { setCurrentUser } = this.props
 //onAuthStateChanged is a method that get triggered when the auth status changed.
 //the component doesn't re-render, the method acts like an event handler.
 
@@ -81,14 +81,14 @@ class App extends React.Component {
             <Route path="/shop" component={ShopPage} />
           </ContentContainer>
         </Switch>
+        <TheFooter />
       </div>  
     );
   }
  
 }
 const mapStateToProps = (state) => (
-  {currentUser: state.user.currentUser, 
-  collection: collectionSelectorForPreview(state) }
+  {currentUser: state.user.currentUser }
 )
 
 const mapDispatchToProps = dispatch => (
