@@ -69,7 +69,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <TheHeader/>
         <LowerHeader />
         <Switch>  
@@ -85,7 +85,7 @@ class App extends React.Component {
           </ContentContainer>
         </Switch>
         <TheFooter />
-      </div>  
+      </>  
     );
   }
  
