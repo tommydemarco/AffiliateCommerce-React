@@ -1,11 +1,13 @@
 import React from 'react';
 import './LogOutPage.styles.scss';
-import { auth } from '../../firebase/firebase.utils'
+import { connect } from 'react-redux'
+import { signOutStart } from '../../redux/user/user.actions'
 
 class LogOutPage extends React.Component {
     
     componentDidMount() {
-        auth.signOut();
+        const { signOutStart } = this.props
+        signOutStart()
     }
 
     render() {
@@ -15,4 +17,10 @@ class LogOutPage extends React.Component {
     }
 }
 
-export default LogOutPage;
+const mapDispatchToProps = dispatch => {
+    return {
+        signOutStart: () => dispatch(signOutStart())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(LogOutPage);

@@ -39,3 +39,29 @@ export const emailSignInFailure = (error) => {
     payload: error,
   };
 };
+
+export const isUserSignedIn = () => {
+  return {
+    type: UserActionTypes.IS_USER_SIGNED_IN,
+  };
+};
+
+export const signOutStart = () => {
+  return {
+    type: UserActionTypes.SIGN_OUT_START,
+  };
+};
+
+export const signOutSuccess = () => {
+  return {
+    type: UserActionTypes.SIGN_OUT_SUCCESS,
+    payload: null,
+  };
+};
+
+export const signOutFailure = (error) => {
+  return {
+    type: UserActionTypes.SIGN_OUT_SUCCESS,
+    payload: error,
+  };
+};

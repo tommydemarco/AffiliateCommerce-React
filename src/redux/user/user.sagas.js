@@ -6,6 +6,8 @@ import {
   googleSignInSuccess,
   emailSignInFailure,
   emailSignInSuccess,
+  signOutFailure,
+  signOutSuccess,
 } from "./user.actions";
 import {
   auth,
@@ -57,6 +59,32 @@ function* emailSignInAsync({ payload: { email, password } }) {
   }
 }
 
+export function* isUserSignedIn() {
+  yield takeLatest(UserActionTypes.IS_USER_SIGNED_IN, checkUserSignedIn);
+}
+
+export function* checkUserSignedIn() {
+  yield console.log("The check user sign in generator was called successfully");
+}
+
+export function* onSignOut() {
+  yield takeLatest(UserActionTypes.SIGN_OUT_START, onSignOutAsync);
+}
+
+export function* onSignOutAsync() {
+  try {
+    yield auth.signOut();
+    yield put(signOutSuccess);
+  } catch (error) {
+    yield put(signOutFailure(error.message));
+  }
+}
+
 export default function* userSaga() {
-  yield all([call(onGoogleSignInStart), call(onEmailSignInStart)]);
+  yield all([
+    call(onGoogleSignInStart),
+    call(onEmailSignInStart),
+    call(isUserSignedIn),
+    call(onSignOut),
+  ]);
 }
