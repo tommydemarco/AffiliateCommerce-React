@@ -2,6 +2,7 @@
 /*===> CALL: a function that invokes a function (first argument)
              with the arguments of the functon to invoke (second argument)
 */
+/*===> PUT: the function that dispatches a certain action creator */
 import { takeEvery, call, put } from "redux-saga/effects";
 
 import {
@@ -18,11 +19,9 @@ export function* fetchCollectionAsync() {
   try {
     const collectionRef = firestore.collection("collections");
     const snapshot = yield collectionRef.get();
-    //using the call effect is optional but is recommended
     const collectionsMap = yield call(convertCollectionArrayToMap, snapshot);
-    //put is the equivalent of dispatch for sagas, we are dispatching
-    //the action creator
     yield put(fetchCollectionSuccess(collectionsMap));
+    console.log("THE FETCHING WAS SUCCESSFULLY PERFORMED");
   } catch (e) {
     yield put(fetchCollectionError(e.message));
   }

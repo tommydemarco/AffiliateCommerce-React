@@ -7,7 +7,7 @@ import rootReducer from "./root-reducer";
 
 //===> IMPORTING THE NECESSARY SAGA FUNCTION FROM REDUX SAGAS
 import createSagaMiddleware from "redux-saga";
-import { fetchCollectionStart } from "./shop/shop.sagas";
+import rootSaga from "./root-sagas";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -22,8 +22,8 @@ export const store = createStore(
   composeEnhancers(applyMiddleware(...middlewares))
 );
 
-//===> RUNNING THE CREATED SAGAS
-sagaMiddleware.run(fetchCollectionStart);
+//===> RUNNING THE ROOT SAGA
+sagaMiddleware.run(rootSaga);
 
 //a persisted version of the store for LOCAL STORAGE
 export const persistor = persistStore(store);
