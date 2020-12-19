@@ -2,7 +2,8 @@ import React from 'react';
 import './SignIn.styles.scss';
 import FormInput from '../form-input/FormInput'  
 import CustomButton from '../custom-button/CustomButton'
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils'
+import { connect } from 'react-redux'
+import { emailSignInStart, googleSignInStart } from '../../redux/user/user.actions'
 
 class SingIn extends React.Component {
     constructor(props) {
@@ -15,15 +16,10 @@ class SingIn extends React.Component {
     }
     handleSubmit = async (event) => {
         event.preventDefault();
-        const { email, password } = this.state
+        const emailAndPassword = { email: this.state.email, password: this.state.password }
 
         try {
-           await auth.signInWithEmailAndPassword(email, password) 
-           this.setState({
-               email: '', 
-               password: ''
-           })
-
+            this.props.emailSignInStart(emailAndPassword)
         } catch(e) {
             console.log(e)
         }
@@ -49,7 +45,7 @@ class SingIn extends React.Component {
                     <FormInput name="password" id="password" type="password" label="password" handleChange={this.handleChange} value={password} required />
                     <div className="buttons">
                         <CustomButton type="submit">Sign in</CustomButton>
-                        <CustomButton onClick={ signInWithGoogle } isGoogleButton>Google sign in</CustomButton>
+                        <CustomButton type="button" onClick={ this.props.googleSignInStart } isGoogleButton>Google sign in</CustomButton>
                     </div>
                 </form>
             </div>
@@ -57,4 +53,11 @@ class SingIn extends React.Component {
     }
 }
 
-export default SingIn;
+const mapDispatchToProps = dispatch => {
+    return {
+        googleSignInStart: () => dispatch(googleSignInStart()),
+        emailSignInStart: (authObject) => dispatch(emailSignInStart(authObject))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(SingIn);
