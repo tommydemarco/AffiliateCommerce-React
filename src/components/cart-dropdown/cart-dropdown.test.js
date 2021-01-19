@@ -8,4 +8,5 @@ Enzyme.configure({ adapter: new Adapter() });
 
 test("renders the component without crashing", () => {
   const wrapper = shallow(<CartDropdown />);
+  expect(wrapper).toBeTruthy();
 });
